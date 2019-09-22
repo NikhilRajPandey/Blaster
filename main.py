@@ -16,16 +16,16 @@ player_position_x = 400
 player_position_y = 600
 height = 40  # One Box Height and width
 player_velocity = 0  # Player will start from rest
-fps = 25
+fps = 60
 
 enemy_position_x_list = [random.randint(50,750),random.randint(50,750),random.randint(50,750)]
 enemy_position_y = 20
-enemy_velocity = 20
+enemy_velocity = 10
 enemy_list = []
 
 missile_height = 10
 missile_position_list = []
-missile_velocity = 20
+missile_velocity = 12
 pygame.display.set_caption(game_title)
 screen = pygame.display.set_mode((screen_width,screen_height))
 clock = pygame.time.Clock()
@@ -47,9 +47,9 @@ while not game_over:
             game_over = True
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_RIGHT:
-                player_velocity = 20
+                player_velocity = 10
             if event.key == pygame.K_LEFT:
-                player_velocity = -20
+                player_velocity = -10
             if event.key == pygame.K_RCTRL:
                 missile_position_list.append([player_position_x,player_position_y,True])
                 fire()
@@ -71,12 +71,16 @@ while not game_over:
     # Updating the position of the player,enemy and Missile
     player_position_x = player_position_x + player_velocity
     enemy_position_y = enemy_position_y + enemy_velocity
-    if is_missile_launched:
-        for missile_position_y,missile_position_x in missile_position_list:
-            missile_position_y = missile_position_y - missile_velocity
-            if missile_position_y < 0:  # Means The missile is collide
-                is_missile_launched = False
 
+    count_missile = 0  # In this for loop the enumurate fucntion is not working so i used this
+    for missile_position_y,missile_position_x,launched in missile_position_list:
+        if launched:
+            missile_position_list[count_missile][1] = missile_position_list[count_missile][1] - missile_velocity
+        if missile_position_list[count_missile][1] < 0:  # Means The missile is collide
+            del missile_position_list[count_missile]
+        count_missile = count_missile + 1
+
+    print(count_missile)
     # Taking Enemy Position 0 when it collides
     if enemy_position_y >= screen_height:
         enemy_position_y = 0
