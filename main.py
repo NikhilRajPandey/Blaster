@@ -16,10 +16,10 @@ player_position_y = 600
 height = 40  # One Box Height and width
 player_velocity = 0  # Player will start from rest
 fps = 30
-enemy_position_x = random.randint(0,750)
+
+enemy_position_x_list = [random.randint(50,750),random.randint(50,750)]
 enemy_position_y = 20
 enemy_velocity = 20
-
 enemy_list = []
 
 pygame.display.set_caption(game_title)
@@ -44,10 +44,12 @@ while not game_over:
 
     # Declaring Enemy and player
     player = pygame.draw.rect(screen,black,[player_position_x,player_position_y,height,height])
-    enemy_list.append([enemy_position_x,enemy_position_y])
+    enemy_list.append([enemy_position_x_list[0],enemy_position_y])
+    enemy_list.append([enemy_position_x_list[1],enemy_position_y])
 
     # If it was not written then enemy will become so long
-    if len(enemy_list) > 2:
+    if len(enemy_list) >= 8:
+        del enemy_list[0]
         del enemy_list[0]
 
     # Updating the position of the player and enemy
@@ -58,8 +60,7 @@ while not game_over:
     # Taking Enemy Position 0 when it collides
     if enemy_position_y >= screen_height:
         enemy_position_y = 0
-        enemy_position_x = random.randint(0,750)
-
+        enemy_position_x_list = [random.randint(50,750),random.randint(50,750)]
 
     pygame.display.update()
     clock.tick(fps)
