@@ -60,7 +60,6 @@ def plot_enemy():
         pygame.draw.rect(screen,green,[enemy_x,enemy_y,enemy_height,enemy_height])
 
 while not game_quit:
-    print(game_over)
     if not game_started:
         screen.blit(background, [0, 0])
         # Intro
@@ -109,7 +108,7 @@ while not game_quit:
         screen.blit(background, [0, 0])
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                game_over = True
+                game_quit = True
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_RIGHT:
                     player_velocity = 10
