@@ -1,7 +1,15 @@
+# Background : Photo by Francesco Ungaro from Pexels
+# Music : https://www.youtube.com/watch?v=QglaLzo_aPk&list=PLKUA473MWUv03VnZLb98iAxdbCLxl0qG3
+
 import pygame
 import random
 
 pygame.init()
+pygame.mixer.init()
+
+background = pygame.image.load('images/background.jpg')
+music = pygame.mixer.music.load('sounds/song.mp3')
+pygame.mixer.music.play(100)
 
 white = (255,255,255)
 black = (0,0,0)
@@ -18,17 +26,17 @@ player_position_x = 400
 player_position_y = 600
 height = 40  # One Box Height and width
 player_velocity = 0  # Player will start from rest
-fps = 120
+fps = 60
 
 enemy_position_x_list = [random.randint(50,750),random.randint(50,750),random.randint(50,750)]
 enemy_height = 60
-enemy_position_y_list = [20,20,20]
-enemy_velocity = 5
+enemy_position_y_list = [5,5,5]
+enemy_velocity = 10
 enemy_list = []
 
 missile_height = 10
 missile_position_list = []
-missile_velocity = 6
+missile_velocity = 12
 pygame.display.set_caption(game_title)
 screen = pygame.display.set_mode((screen_width,screen_height))
 clock = pygame.time.Clock()
@@ -43,16 +51,16 @@ def plot_enemy():
         pygame.draw.rect(screen,green,[enemy_x,enemy_y,enemy_height,enemy_height])
 
 while not game_over:
-    screen.fill(white)  # Most important step
+    screen.blit(background, [0, 0])
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             game_over = True
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_RIGHT:
-                player_velocity = 5
+                player_velocity = 10
             if event.key == pygame.K_LEFT:
-                player_velocity = -5
+                player_velocity = -10
             if event.key == pygame.K_RCTRL:
                 missile_position_list.append([player_position_x,player_position_y,True])
                 fire()
@@ -97,7 +105,7 @@ while not game_over:
             game_over_reason = "You are collide with Enemy"
             game_over = True
 
-    no_of_kills = 0
+    no_of_kills = 0 # I will use this later
 
     # Destroying Enemy when missile hit them
     for missile_count,(missile_position_x, missile_position_y, launched) in enumerate(missile_position_list):
