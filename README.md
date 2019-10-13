@@ -16,6 +16,6 @@ Down Arrow Key => Player will go right
 Left Arrow Key => Player will go left
 Left Control key => Fire
 ```
-# Contributions
+# Credits
 ### Background : Photo by Francesco Ungaro from Pexels
 ### Music : [Julius Dreisig & Zeus X Crona - Invisible [NCS Release]](https://www.youtube.com/watch?v=QglaLzo_aPk&list=PLKUA473MWUv03VnZLb98iAxdbCLxl0qG3)
