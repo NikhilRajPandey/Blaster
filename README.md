@@ -9,7 +9,7 @@ The game is made using python 3.7 & pygame module.Hope you like it.
 > ### Game-Intro <br>
 ![screenshot](images/screenshot-1.png)
 > ### Game-Rule <br>
-In this game you have to not collid with enemy that are falling on you.
+In this game you have to not Collid with enemy that are falling on you.
 ## Controls
 ```
 Down Arrow Key => Player will go right
